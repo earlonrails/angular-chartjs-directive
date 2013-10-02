@@ -1,5 +1,5 @@
 # Angular Chart-js Directive
-[Homepage](https://github.com/earlonrails/angular-chartjs-directive)
+[Homepage](http://earlonrails.github.io/angular-chartjs-directive/)
 
 
 
@@ -16,7 +16,7 @@ bower install angular-chartjs-directive
 ```
 
 ## Example
-See the [homepage](https://github.com/earlonrails/angular-chartjs-directive) for an example.
+See the [homepage](http://earlonrails.github.io/angular-chartjs-directive/) for an example.
 
 ```html
 <div ng-app="chartjs-directive">
