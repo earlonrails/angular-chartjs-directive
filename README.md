@@ -1,4 +1,28 @@
-angular-chartjs-directive
-=========================
+# Angular Chart-js Directive
+[Homepage](https://github.com/earlonrails/angular-chartjs-directive)
 
-An Angular Js Directive which allows to simplify the use of Chartjs charts
+
+
+## Usage
+1. Include `chartjs-directive.js`.
+2. Add `chartjs-directive` as a dependency to your app.
+3. Make `<chart>`s.
+
+## Bower
+Installable via `bower`:
+
+```bash
+bower install angular-chartjs-directive
+```
+
+## Example
+See the [homepage](https://github.com/earlonrails/angular-chartjs-directive) for an example.
+
+```html
+<div ng-app="chartjs-directive">
+  <chart value="myChart"></chart>
+</div>
+```
+
+## License
+MIT

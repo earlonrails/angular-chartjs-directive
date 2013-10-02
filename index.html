@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>AngularJS Chartjs Directive</title>
+    <meta name="description" content="chartjs-directive.">
+    <link href="http://netdna.bootstrapcdn.com/bootswatch/2.3.0/cerulean/bootstrap.min.css" rel="stylesheet">
+    <style>
+      #editor {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+    </style>
+  </head>
+  <body class="container" ng-app="chartjs-directive">
+  <div class="row">
+    <div class="span12">
+      <h1>Angular Chartjs Directive</h1>
+      <hr>
+      <p></p>
+    </div>
+  </div>
+  <h2>Usage</h2>
+
+  <div class="row">
+    <div class="span12">
+      <ol>
+        <li>Include <code>chartjs-directive.js</code>.</li>
+        <li>Add directive
+<pre><code>&lt;div ng-app="chartjs-directive"&gt;
+  &lt;chart value="myChart"&gt;&lt;/chart&gt;
+&lt;/div&gt;</code></pre></li>
+
+        <li>Inject some data
+<pre><code>
+function myContoller(){
+
+  var data = {
+    labels : ["January","February","March","April","May","June","July"],
+    datasets : [
+      {
+        fillColor : "rgba(220,220,220,0.5)",
+        strokeColor : "rgba(220,220,220,1)",
+        pointColor : "rgba(220,220,220,1)",
+        pointStrokeColor : "#fff",
+        data : [65,59,90,81,56,55,40]
+      },
+      {
+        fillColor : "rgba(151,187,205,0.5)",
+        strokeColor : "rgba(151,187,205,1)",
+        pointColor : "rgba(151,187,205,1)",
+        pointStrokeColor : "#fff",
+        data : [28,48,40,19,96,27,100]
+      }
+    ]
+  }
+
+  $scope.myChart.data = data;
+}
+</code></pre></li>
+      </ol>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="span12">
+      <h2>In action</h2>
+    </div>
+  </div>
+  <div class="row">
+
+    <div class="span6" ng-controller="myController">
+      <chart value="myChart"></chart>
+      <p>^ This is a chart</p>
+      <button ng-click="generateData()" class="btn btn-success">
+        Update Data
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span12">
+      <h3>Tag Parameters</h3>
+      <ul>
+        <li><code>width</code> (default: 600)</li>
+        <li><code>height</code> (default: 400)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span12">
+      <h3>Chart Parameters</h3>
+      <ul>
+        <li><code>data</code></li>
+        <li><code>options</code></li>
+        <li><a href="http://www.chartjs.org/docs/">See Chartjs documentation</a></li>
+      </ul>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="span12">
+      <h2>Bower</h2>
+      <p>Installable via <code>bower</code>:</p>
+      <code>bower install angular-chartjs-directive</code>
+      <hr>
+      <h2>License</h2>
+      <p>MIT</p>
+    </div>
+  </div>
+  <a href="https://github.com/earlonrails/angular-chartjs-directive"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+  <script src="lib/Chart.min.js"></script>
+  <script src="chartjs-directive.js"></script>
+  <script type="text/javascript">
+    function myController($scope){
+      $scope.generateData = function(){
+        var sevenRandNumbers = function(){
+          var numberArray = [];
+          for (var i=0;i<7;i++){
+            numberArray.push(Math.floor((Math.random()*100)+1));
+          }
+          return numberArray;
+        };
+        var data = {
+          labels : ["January","February","March","April","May","June","July"],
+          datasets : [
+            {
+              fillColor : "rgba(220,220,220,0.5)",
+              strokeColor : "rgba(220,220,220,1)",
+              pointColor : "rgba(220,220,220,1)",
+              pointStrokeColor : "#fff",
+              data : sevenRandNumbers()
+            },
+            {
+              fillColor : "rgba(151,187,205,0.5)",
+              strokeColor : "rgba(151,187,205,1)",
+              pointColor : "rgba(151,187,205,1)",
+              pointStrokeColor : "#fff",
+              data : sevenRandNumbers()
+            }
+          ]
+        };
+        $scope.myChart = {"data": data, "options": {} };
+      };
+      $scope.generateData();
+    }
+  </script>
+
+  </body>
+</html>
