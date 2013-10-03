@@ -21,6 +21,12 @@ angular.module('chartjs-directive', []).
         };
         canvas.width = options.width;
         canvas.height = options.height;
+        scope.$watch(function(){ return element.attr('type'); }, function(value){
+          if(!value) return;
+          options.type = value;
+          var chartType = options.type;
+          new Chart(context)[chartType](scope.chartObject.data, scope.chartObject.options);
+        });
 
         //Update when charts data changes
         scope.$watch(function() { return scope.chartObject; }, function(value) {
