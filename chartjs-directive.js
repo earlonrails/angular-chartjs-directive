@@ -12,8 +12,10 @@ angular.module('chartjs-directive', []).
         chartObject: "=value"
       },
       link: function (scope, element, attrs) {
-        var canvas = element.find('canvas')[0];
-        var context = canvas.getContext('2d');
+        var canvas  = element.find('canvas')[0],
+            context = canvas.getContext('2d'),
+            chart;
+
         var options = {
           type:   attrs.type   || "Line",
           width:  attrs.width  || baseWidth,
@@ -21,18 +23,20 @@ angular.module('chartjs-directive', []).
         };
         canvas.width = options.width;
         canvas.height = options.height;
+        chart = new Chart(context);
+
         scope.$watch(function(){ return element.attr('type'); }, function(value){
           if(!value) return;
           options.type = value;
           var chartType = options.type;
-          new Chart(context)[chartType](scope.chartObject.data, scope.chartObject.options);
+          chart[chartType](scope.chartObject.data, scope.chartObject.options);
         });
 
         //Update when charts data changes
         scope.$watch(function() { return scope.chartObject; }, function(value) {
           if(!value) return;
           var chartType = options.type;
-          new Chart(context)[chartType](scope.chartObject.data, scope.chartObject.options);
+          chart[chartType](scope.chartObject.data, scope.chartObject.options);
         });
       }
     }
