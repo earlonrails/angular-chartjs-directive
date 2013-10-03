@@ -76,7 +76,7 @@ function myContoller(){
     <div class="span6">
       <chart value="myChart" id="myCoolChart"></chart>
       <p>^ This is a chart</p>
-      <button ng-click="generateData()" class="btn btn-success">
+      <button ng-click="updateData()" class="btn btn-success">
         Update Data
       </button>
     </div>
@@ -159,6 +159,23 @@ function myContoller(){
   <script src="chartjs-directive.js"></script>
   <script type="text/javascript">
     function myController($scope){
+      $scope.updateData = function() {
+        var chart = document.getElementById("myCoolChart").getAttribute("type");
+        switch (chart) {
+          case 'PolarArea':
+            $scope.generatePieData();
+            break;
+          case 'Pie':
+            $scope.generatePieData();
+            break;
+          case 'Doughnut':
+            $scope.generatePieData();
+            break;
+          default:
+            $scope.generateData();
+        }
+      };
+
       $scope.generateData = function(){
         var sevenRandNumbers = function(){
           var numberArray = [];
@@ -209,32 +226,32 @@ function myContoller(){
 
       $scope.line = function() {
         document.getElementById('myCoolChart').setAttribute('type', 'Line');
-        $scope.generateData();
+        $scope.updateData();
       };
 
       $scope.bar = function() {
         document.getElementById('myCoolChart').setAttribute('type', 'Bar');
-        $scope.generateData();
+        $scope.updateData();
       };
 
       $scope.radar = function() {
         document.getElementById('myCoolChart').setAttribute('type', 'Radar');
-        $scope.generateData();
+        $scope.updateData();
       };
 
       $scope.polarArea = function() {
         document.getElementById('myCoolChart').setAttribute('type', 'PolarArea');
-        $scope.generatePieData();
+        $scope.updateData();
       };
 
       $scope.pie = function() {
         document.getElementById('myCoolChart').setAttribute('type', 'Pie');
-        $scope.generatePieData();
+        $scope.updateData();
       };
 
       $scope.doughnut = function() {
         document.getElementById('myCoolChart').setAttribute('type', 'Doughnut');
-        $scope.generatePieData();
+        $scope.updateData();
       };
 
       $scope.generateData();
