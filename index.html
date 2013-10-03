@@ -16,7 +16,7 @@
       }
     </style>
   </head>
-  <body class="container" ng-app="chartjs-directive">
+  <body class="container" ng-app="chartjs-directive" ng-controller="myController">
   <div class="row">
     <div class="span12">
       <h1>Angular Chartjs Directive</h1>
@@ -71,10 +71,10 @@ function myContoller(){
       <h2>In action</h2>
     </div>
   </div>
-  <div class="row">
 
-    <div class="span6" ng-controller="myController">
-      <chart value="myChart"></chart>
+  <div class="row">
+    <div class="span6">
+      <chart value="myChart" id="myCoolChart"></chart>
       <p>^ This is a chart</p>
       <button ng-click="generateData()" class="btn btn-success">
         Update Data
@@ -93,11 +93,41 @@ function myContoller(){
 
       <p>value can be any of the chartjs chart types:</p>
       <ul>
-        <li>Bar</li>
-        <li>Radar</li>
-        <li>Polar</li>
-        <li>Pie</li>
-        <li>Doughnut</li>
+        <li>
+          <button ng-click="line()" class="btn btn-success">
+            Line
+          </button>
+        </li>
+        <br />
+        <li>
+          <button ng-click="bar()" class="btn btn-success">
+            Bar
+          </button>
+        </li>
+        <br />
+        <li>
+          <button ng-click="radar()" class="btn btn-success">
+            Radar
+          </button>
+        </li>
+        <br />
+        <li>
+          <button ng-click="polarArea()" class="btn btn-success">
+            Polar
+          </button>
+        </li>
+        <br />
+        <li>
+          <button ng-click="pie()" class="btn btn-success">
+            Pie
+          </button>
+        </li>
+        <br />
+        <li>
+          <button ng-click="doughnut()" class="btn btn-success">
+            Doughnut
+          </button>
+        </li>
       </ul>
     </div>
   </div>
@@ -158,6 +188,55 @@ function myContoller(){
         };
         $scope.myChart = {"data": data, "options": {} };
       };
+
+      $scope.generatePieData = function(){
+        var data = [
+          {
+            value: Math.floor((Math.random()*100)+1),
+            color:"#F38630"
+          },
+          {
+            value : Math.floor((Math.random()*100)+1),
+            color : "#E0E4CC"
+          },
+          {
+            value : Math.floor((Math.random()*100)+1),
+            color : "#69D2E7"
+          }
+        ]
+        $scope.myChart = {"data": data, "options": {} };
+      };
+
+      $scope.line = function() {
+        document.getElementById('myCoolChart').setAttribute('type', 'Line');
+        $scope.generateData();
+      };
+
+      $scope.bar = function() {
+        document.getElementById('myCoolChart').setAttribute('type', 'Bar');
+        $scope.generateData();
+      };
+
+      $scope.radar = function() {
+        document.getElementById('myCoolChart').setAttribute('type', 'Radar');
+        $scope.generateData();
+      };
+
+      $scope.polarArea = function() {
+        document.getElementById('myCoolChart').setAttribute('type', 'PolarArea');
+        $scope.generatePieData();
+      };
+
+      $scope.pie = function() {
+        document.getElementById('myCoolChart').setAttribute('type', 'Pie');
+        $scope.generatePieData();
+      };
+
+      $scope.doughnut = function() {
+        document.getElementById('myCoolChart').setAttribute('type', 'Doughnut');
+        $scope.generatePieData();
+      };
+
       $scope.generateData();
     }
   </script>
