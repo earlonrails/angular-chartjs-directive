@@ -2,11 +2,11 @@
 [Homepage](http://earlonrails.github.io/angular-chartjs-directive/)
 
 
-
 ## Usage
-1. Include `chartjs-directive.js`.
-2. Add `chartjs-directive` as a dependency to your app.
-3. Make `<chart>`s.
+1. Include [chartjs](https://github.com/nnnick/Chart.js) via script tag, can use bower or download min
+2. Include `chartjs-directive.js`.
+3. Add `chartjs-directive` as a dependency to your app.
+4. Make `<chart>`s.
 
 ## Bower
 Installable via `bower`:
