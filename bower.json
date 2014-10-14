@@ -12,7 +12,7 @@
     "README.md"
   ],
   "dependencies": {
-    "angular": "~1.0.4",
-    "chartjs" : "~1.0.1"
+    "angular": ">=1"
+    "chartjs" : ">=1.0.1"
   }
 }
