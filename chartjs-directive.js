@@ -37,7 +37,7 @@ angular.module('chartjs-directive', []).
           if(!value) return;
           var chartType = options.type;
           chart[chartType](scope.chartObject.data, scope.chartObject.options);
-        });
+        }, true);
       }
     }
   });
