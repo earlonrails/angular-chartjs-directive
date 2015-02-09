@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="myApp">
   <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
@@ -16,7 +16,7 @@
       }
     </style>
   </head>
-  <body class="container" ng-app="chartjs-directive" ng-controller="myController">
+  <body class="container" ng-controller="myController">
   <div class="row">
     <div class="span12">
       <h1>Angular Chartjs Directive</h1>
@@ -153,109 +153,113 @@ function myContoller(){
       <p>MIT</p>
     </div>
   </div>
-  <a href="https://github.com/earlonrails/angular-chartjs-directive"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-  <script src="vendor/assets/bower/chartjs/Chart.min.js"></script>
-  <script src="chartjs-directive.js"></script>
+  <a href="https://github.com/earlonrails/angular-chartjs-directive">
+    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub">
+  </a>
+  <script type="text/javascript" src="vendor/angular/angular.min.js"></script>
+  <script type="text/javascript" src="vendor/bower_components/chartjs/Chart.min.js"></script>
+  <script type="text/javascript" src="chartjs-directive.js"></script>
   <script type="text/javascript">
-    function myController($scope){
-      $scope.updateData = function() {
-        var chart = document.getElementById("myCoolChart").getAttribute("type");
-        switch (chart) {
-          case 'PolarArea':
-            $scope.generatePieData();
-            break;
-          case 'Pie':
-            $scope.generatePieData();
-            break;
-          case 'Doughnut':
-            $scope.generatePieData();
-            break;
-          default:
-            $scope.generateData();
-        }
-      };
-
-      $scope.generateData = function(){
-        var sevenRandNumbers = function(){
-          var numberArray = [];
-          for (var i=0;i<7;i++){
-            numberArray.push(Math.floor((Math.random()*100)+1));
+    angular.module('myApp', ['chartjs-directive'])
+      .controller('myController', function($scope){
+        $scope.updateData = function() {
+          var chart = document.getElementById("myCoolChart").getAttribute("type");
+          switch (chart) {
+            case 'PolarArea':
+              $scope.generatePieData();
+              break;
+            case 'Pie':
+              $scope.generatePieData();
+              break;
+            case 'Doughnut':
+              $scope.generatePieData();
+              break;
+            default:
+              $scope.generateData();
           }
-          return numberArray;
         };
-        var data = {
-          labels : ["January","February","March","April","May","June","July"],
-          datasets : [
+
+        $scope.generateData = function(){
+          var sevenRandNumbers = function(){
+            var numberArray = [];
+            for (var i=0;i<7;i++){
+              numberArray.push(Math.floor((Math.random()*100)+1));
+            }
+            return numberArray;
+          };
+          var data = {
+            labels : ["January","February","March","April","May","June","July"],
+            datasets : [
+              {
+                fillColor : "rgba(220,220,220,0.5)",
+                strokeColor : "rgba(220,220,220,1)",
+                pointColor : "rgba(220,220,220,1)",
+                pointStrokeColor : "#fff",
+                data : sevenRandNumbers()
+              },
+              {
+                fillColor : "rgba(151,187,205,0.5)",
+                strokeColor : "rgba(151,187,205,1)",
+                pointColor : "rgba(151,187,205,1)",
+                pointStrokeColor : "#fff",
+                data : sevenRandNumbers()
+              }
+            ]
+          };
+          $scope.myChart = {"data": data, "options": {} };
+        };
+
+        $scope.generatePieData = function(){
+          var data = [
             {
-              fillColor : "rgba(220,220,220,0.5)",
-              strokeColor : "rgba(220,220,220,1)",
-              pointColor : "rgba(220,220,220,1)",
-              pointStrokeColor : "#fff",
-              data : sevenRandNumbers()
+              value: Math.floor((Math.random()*100)+1),
+              color:"#F38630"
             },
             {
-              fillColor : "rgba(151,187,205,0.5)",
-              strokeColor : "rgba(151,187,205,1)",
-              pointColor : "rgba(151,187,205,1)",
-              pointStrokeColor : "#fff",
-              data : sevenRandNumbers()
+              value : Math.floor((Math.random()*100)+1),
+              color : "#E0E4CC"
+            },
+            {
+              value : Math.floor((Math.random()*100)+1),
+              color : "#69D2E7"
             }
           ]
+          $scope.myChart = {"data": data, "options": {} };
         };
-        $scope.myChart = {"data": data, "options": {} };
-      };
 
-      $scope.generatePieData = function(){
-        var data = [
-          {
-            value: Math.floor((Math.random()*100)+1),
-            color:"#F38630"
-          },
-          {
-            value : Math.floor((Math.random()*100)+1),
-            color : "#E0E4CC"
-          },
-          {
-            value : Math.floor((Math.random()*100)+1),
-            color : "#69D2E7"
-          }
-        ]
-        $scope.myChart = {"data": data, "options": {} };
-      };
+        $scope.line = function() {
+          document.getElementById('myCoolChart').setAttribute('type', 'Line');
+          $scope.updateData();
+        };
 
-      $scope.line = function() {
-        document.getElementById('myCoolChart').setAttribute('type', 'Line');
-        $scope.updateData();
-      };
+        $scope.bar = function() {
+          document.getElementById('myCoolChart').setAttribute('type', 'Bar');
+          $scope.updateData();
+        };
 
-      $scope.bar = function() {
-        document.getElementById('myCoolChart').setAttribute('type', 'Bar');
-        $scope.updateData();
-      };
+        $scope.radar = function() {
+          document.getElementById('myCoolChart').setAttribute('type', 'Radar');
+          $scope.updateData();
+        };
 
-      $scope.radar = function() {
-        document.getElementById('myCoolChart').setAttribute('type', 'Radar');
-        $scope.updateData();
-      };
+        $scope.polarArea = function() {
+          document.getElementById('myCoolChart').setAttribute('type', 'PolarArea');
+          $scope.updateData();
+        };
 
-      $scope.polarArea = function() {
-        document.getElementById('myCoolChart').setAttribute('type', 'PolarArea');
-        $scope.updateData();
-      };
+        $scope.pie = function() {
+          document.getElementById('myCoolChart').setAttribute('type', 'Pie');
+          $scope.updateData();
+        };
 
-      $scope.pie = function() {
-        document.getElementById('myCoolChart').setAttribute('type', 'Pie');
-        $scope.updateData();
-      };
+        $scope.doughnut = function() {
+          document.getElementById('myCoolChart').setAttribute('type', 'Doughnut');
+          $scope.updateData();
+        };
 
-      $scope.doughnut = function() {
-        document.getElementById('myCoolChart').setAttribute('type', 'Doughnut');
-        $scope.updateData();
-      };
+        $scope.generateData();
+      });
 
-      $scope.generateData();
-    }
   </script>
 
   </body>
