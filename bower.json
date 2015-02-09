@@ -1,6 +1,6 @@
 {
   "name": "angular-chartjs-directive",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "main": "./chartjs-directive.js",
   "ignore": [
     ".bowerrc",
