@@ -29,7 +29,9 @@ angular.module('chartjs-directive', []).
           if (!value) return;
           options.type = value;
           var chartType = options.type;
-          chart[chartType](scope.chartObject.data, scope.chartObject.options);
+          if(typeof scope.chartObject !== 'undefined'){
+            chart[chartType](scope.chartObject.data, scope.chartObject.options);
+          }
         });
 
         //Update when charts data changes
