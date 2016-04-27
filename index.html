@@ -40,21 +40,21 @@
 function myContoller(){
 
   var data = {
-    labels : ["January","February","March","April","May","June","July"],
-    datasets : [
+    labels: ["January","February","March","April","May","June","July"],
+    datasets: [
       {
-        fillColor : "rgba(220,220,220,0.5)",
-        strokeColor : "rgba(220,220,220,1)",
-        pointColor : "rgba(220,220,220,1)",
-        pointStrokeColor : "#fff",
-        data : [65,59,90,81,56,55,40]
+        fillColor: "rgba(220,220,220,0.5)",
+        strokeColor: "rgba(220,220,220,1)",
+        pointColor: "rgba(220,220,220,1)",
+        pointStrokeColor: "#fff",
+        data: [65,59,90,81,56,55,40]
       },
       {
-        fillColor : "rgba(151,187,205,0.5)",
-        strokeColor : "rgba(151,187,205,1)",
-        pointColor : "rgba(151,187,205,1)",
-        pointStrokeColor : "#fff",
-        data : [28,48,40,19,96,27,100]
+        fillColor: "rgba(151,187,205,0.5)",
+        strokeColor: "rgba(151,187,205,1)",
+        pointColor: "rgba(151,187,205,1)",
+        pointStrokeColor: "#fff",
+        data: [28,48,40,19,96,27,100]
       }
     ]
   }
@@ -86,12 +86,11 @@ function myContoller(){
     <div class="span12">
       <h3>Tag Parameters</h3>
       <ul>
-        <li><code>value</code> (default: "Line")</li>
         <li><code>width</code> (default: 600)</li>
         <li><code>height</code> (default: 400)</li>
       </ul>
 
-      <p>value can be any of the chartjs chart types:</p>
+      <p>Can be any of the chartjs chart types:</p>
       <ul>
         <li>
           <button ng-click="line()" class="btn btn-success">
@@ -157,29 +156,29 @@ function myContoller(){
     <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub">
   </a>
   <script type="text/javascript" src="vendor/angular/angular.min.js"></script>
-  <script type="text/javascript" src="vendor/chartjs/Chart.min.js"></script>
+  <script type="text/javascript" src="vendor/chartjs/dist/Chart.js"></script>
   <script type="text/javascript" src="chartjs-directive.js"></script>
   <script type="text/javascript">
     angular.module('myApp', ['chartjs-directive'])
       .controller('myController', function($scope){
-        $scope.updateData = function() {
-          var chart = document.getElementById("myCoolChart").getAttribute("type");
-          switch (chart) {
-            case 'PolarArea':
-              $scope.generatePieData();
+        $scope.updateData = function(type) {
+          var type = type || $scope.myChart.type;
+          switch (type) {
+            case 'polarArea':
+              $scope.generatePieData(type);
               break;
-            case 'Pie':
-              $scope.generatePieData();
+            case 'pie':
+              $scope.generatePieData(type);
               break;
-            case 'Doughnut':
-              $scope.generatePieData();
+            case 'doughnut':
+              $scope.generatePieData(type);
               break;
             default:
-              $scope.generateData();
+              $scope.generateData(type);
           }
         };
 
-        $scope.generateData = function(){
+        $scope.generateData = function(type){
           var sevenRandNumbers = function(){
             var numberArray = [];
             for (var i=0;i<7;i++){
@@ -188,76 +187,97 @@ function myContoller(){
             return numberArray;
           };
           var data = {
-            labels : ["January","February","March","April","May","June","July"],
-            datasets : [
+            labels: ["January","February","March","April","May","June","July"],
+            datasets: [
               {
-                fillColor : "rgba(220,220,220,0.5)",
-                strokeColor : "rgba(220,220,220,1)",
-                pointColor : "rgba(220,220,220,1)",
-                pointStrokeColor : "#fff",
-                data : sevenRandNumbers()
+                label: "My First dataset",
+                lineTension: 0.1,
+                backgroundColor: "rgba(75,192,192,0.4)",
+                borderColor: "rgba(75,192,192,1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "#fff",
+                pointBackgroundColor: "rgba(220,220,220,1)",
+                pointBorderWidth: 1,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 2,
+                pointRadius: 1,
+                data: sevenRandNumbers()
               },
               {
-                fillColor : "rgba(151,187,205,0.5)",
-                strokeColor : "rgba(151,187,205,1)",
-                pointColor : "rgba(151,187,205,1)",
-                pointStrokeColor : "#fff",
-                data : sevenRandNumbers()
+                label: "My Second dataset",
+                lineTension: 0.1,
+                backgroundColor: "rgba(75,192,192,0.4)",
+                borderColor: "rgba(75,192,192,1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "#fff",
+                pointBackgroundColor: "rgba(151,187,205,0.5)",
+                pointBorderWidth: 1,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(151,187,205,1)",
+                pointHoverBorderColor: "rgba(151,187,205,1)",
+                pointHoverBorderWidth: 2,
+                pointRadius: 1,
+                data: sevenRandNumbers()
               }
             ]
           };
-          $scope.myChart = {"data": data, "options": {} };
+          $scope.myChart = {"data": data, "options": {}, "type": type};
         };
 
-        $scope.generatePieData = function(){
-          var data = [
-            {
-              value: Math.floor((Math.random()*100)+1),
-              color:"#F38630"
-            },
-            {
-              value : Math.floor((Math.random()*100)+1),
-              color : "#E0E4CC"
-            },
-            {
-              value : Math.floor((Math.random()*100)+1),
-              color : "#69D2E7"
-            }
-          ]
-          $scope.myChart = {"data": data, "options": {} };
+        $scope.generatePieData = function(type){
+          var data = {
+            labels: ["Packer Fans", "Bear Fans", "Viking Fans"],
+            datasets: [
+              {
+                data: [ Math.floor((Math.random()*100)+1) + 90 ],
+                color:"#244729"
+              },
+              {
+                data: [ Math.floor((Math.random()*100)+1) ],
+                color: "#201B43"
+              },
+              {
+                data: [ Math.floor((Math.random()*100)+1) ],
+                color: "#6A447F"
+              }
+            ]
+          }
+          $scope.myChart = {"data": data, "options": {}, "type": type};
         };
 
         $scope.line = function() {
-          document.getElementById('myCoolChart').setAttribute('type', 'Line');
-          $scope.updateData();
+          $scope.updateData('line');
         };
 
         $scope.bar = function() {
-          document.getElementById('myCoolChart').setAttribute('type', 'Bar');
-          $scope.updateData();
+          $scope.updateData('bar');
         };
 
         $scope.radar = function() {
-          document.getElementById('myCoolChart').setAttribute('type', 'Radar');
-          $scope.updateData();
+          $scope.updateData('radar');
         };
 
         $scope.polarArea = function() {
-          document.getElementById('myCoolChart').setAttribute('type', 'PolarArea');
-          $scope.updateData();
+          $scope.updateData('polarArea');
         };
 
         $scope.pie = function() {
-          document.getElementById('myCoolChart').setAttribute('type', 'Pie');
-          $scope.updateData();
+          $scope.updateData('pie');
         };
 
         $scope.doughnut = function() {
-          document.getElementById('myCoolChart').setAttribute('type', 'Doughnut');
-          $scope.updateData();
+          $scope.updateData('doughnut');
         };
 
-        $scope.generateData();
+        $scope.generateData('line');
       });
 
   </script>

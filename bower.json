@@ -13,6 +13,6 @@
   ],
   "dependencies": {
     "angular": ">=1",
-    "chartjs" : ">=1.0.1"
+    "chartjs" : ">=2.0.0"
   }
 }
