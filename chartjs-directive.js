@@ -12,22 +12,29 @@ angular.module('chartjs-directive', []).
         chartObject: "=value"
       },
       link: function (scope, element, attrs) {
-        var canvas  = element.find('canvas')[0];
-        var context = canvas.getContext('2d');
-        var chart;
+        var canvas, context, chart, options;
+        var init = function(type){
+          element.empty();
+          element.append('<canvas></canvas>');
 
-        var options = {
-          type:   attrs.type   || "Line",
-          width:  attrs.width  || baseWidth,
-          height: attrs.height || baseHeight
+          canvas  = element.find("canvas")[0];
+          context = canvas.getContext("2d");
+
+          options = {
+              type:   type   || "Line",
+              width:  attrs.width  || baseWidth,
+              height: attrs.height || baseHeight,
+              last_type: false
+          };
+          canvas.height = options.height;
+          canvas.width = options.width;
+          chart = new Chart(context);
         };
-        canvas.width = options.width;
-        canvas.height = options.height;
-        chart = new Chart(context);
+        init(attrs.type);
 
         scope.$watch(function(){ return element.attr('type'); }, function(value){
           if (!value) return;
-          options.type = value;
+          init(value);
           var chartType = options.type;
           if(typeof scope.chartObject !== 'undefined'){
             chart[chartType](scope.chartObject.data, scope.chartObject.options);
