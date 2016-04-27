@@ -1,0 +1,34 @@
+{
+  "name": "angular-chartjs-directive",
+  "version": "1.0.0",
+  "description": "An Angular Js Directive which allows to simplify the use of Chartjs charts",
+  "main": "chartjs-directive.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/earlonrails/angular-chartjs-directive.git"
+  },
+  "keywords": [
+    "An",
+    "Angular",
+    "Js",
+    "Directive",
+    "which",
+    "allows",
+    "to",
+    "simplify",
+    "the",
+    "use",
+    "of",
+    "Chartjs",
+    "charts"
+  ],
+  "author": "Kevin Krauss <earlkrauss@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/earlonrails/angular-chartjs-directive/issues"
+  },
+  "homepage": "https://github.com/earlonrails/angular-chartjs-directive#readme"
+}
